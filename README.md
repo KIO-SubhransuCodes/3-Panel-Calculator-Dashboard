@@ -1,6 +1,5 @@
-========================================================================
+
 INTERACTIVE CALCULATOR DASHBOARD: CODE ARCHITECTURE OVERVIEW
-========================================================================
 
 This project is a modern, modular, and responsive 3-Panel Calculator 
 Dashboard built using standard web technologies. The codebase is 
