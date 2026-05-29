@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Calculator Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="wrapper">
+    <div class="header-bar">
+        <div class="header-title">Calculator</div>
+        <button class="theme-toggle-btn" onclick="toggleTheme()">
+            <span id="theme-icon">☀️</span> <span id="theme-text">Light Mode</span>
+        </button>
+    </div>
+
+    <div class="dashboard">
+        <div class="side-panel">
+            <div class="panel-title">Mode Select</div>
+            <div class="mode-menu">
+                <button class="mode-btn active" id="btn-normal" onclick="switchMode('normal')">Normal</button>
+                <button class="mode-btn" id="btn-scientific" onclick="switchMode('scientific')">Scientific</button>
+                <button class="mode-btn" id="btn-converter" onclick="switchMode('converter')">Converter</button>
+            </div>
+        </div>
+
+        <div class="calc-container">
+            <div class="display-screen" id="calc-display">
+                <div class="history-line" id="history"></div>
+                <div class="current-input" id="current">0</div>
+            </div>
+
+            <div id="normal-keypad" class="keypad active">
+                <button class="key fn" onclick="clearAll()">AC</button>
+                <button class="key fn" onclick="deleteLast()">DEL</button>
+                <button class="key fn" onclick="appendOperator('%')">%</button>
+                <button class="key op" onclick="appendOperator('/')">÷</button>
+
+                <button class="key num" onclick="appendNumber('7')">7</button>
+                <button class="key num" onclick="appendNumber('8')">8</button>
+                <button class="key num" onclick="appendNumber('9')">9</button>
+                <button class="key op" onclick="appendOperator('*')">×</button>
+
+                <button class="key num" onclick="appendNumber('4')">4</button>
+                <button class="key num" onclick="appendNumber('5')">5</button>
+                <button class="key num" onclick="appendNumber('6')">6</button>
+                <button class="key op" onclick="appendOperator('-')">-</button>
+
+                <button class="key num" onclick="appendNumber('1')">1</button>
+                <button class="key num" onclick="appendNumber('2')">2</button>
+                <button class="key num" onclick="appendNumber('3')">3</button>
+                <button class="key op" onclick="appendOperator('+')">+</button>
+
+                <button class="key num double-width" onclick="appendNumber('0')">0</button>
+                <button class="key num" onclick="appendNumber('.')">.</button>
+                <button class="key op" onclick="calculate()">=</button>
+            </div>
+
+            <div id="scientific-keypad" class="keypad">
+                <button class="key fn" onclick="clearAll()">AC</button>
+                <button class="key fn" onclick="appendScientific('sin')">sin</button>
+                <button class="key fn" onclick="appendScientific('cos')">cos</button>
+                <button class="key fn" onclick="appendScientific('tan')">tan</button>
+                <button class="key op" onclick="appendOperator('/')">÷</button>
+
+                <button class="key fn" onclick="appendScientific('ln')">ln</button>
+                <button class="key num" onclick="appendNumber('7')">7</button>
+                <button class="key num" onclick="appendNumber('8')">8</button>
+                <button class="key num" onclick="appendNumber('9')">9</button>
+                <button class="key op" onclick="appendOperator('*')">×</button>
+
+                <button class="key fn" onclick="appendScientific('log')">log</button>
+                <button class="key num" onclick="appendNumber('4')">4</button>
+                <button class="key num" onclick="appendNumber('5')">5</button>
+                <button class="key num" onclick="appendNumber('6')">6</button>
+                <button class="key op" onclick="appendOperator('-')">-</button>
+
+                <button class="key fn" onclick="appendScientific('sqrt')">√</button>
+                <button class="key num" onclick="appendNumber('1')">1</button>
+                <button class="key num" onclick="appendNumber('2')">2</button>
+                <button class="key num" onclick="appendNumber('3')">3</button>
+                <button class="key op" onclick="appendOperator('+')">+</button>
+
+                <button class="key fn" onclick="appendScientific('pi')">π</button>
+                <button class="key fn" onclick="appendScientific('pow')">xʸ</button>
+                <button class="key num" onclick="appendNumber('0')">0</button>
+                <button class="key num" onclick="appendNumber('.')">.</button>
+                <button class="key op" onclick="calculate()">=</button>
+            </div>
+
+            <div id="converter-container">
+                <div class="conv-row">
+                    <label>Conversion Type</label>
+                    <select id="conv-type" class="conv-select" onchange="updateConverterUnits()">
+                        <option value="weight">Weight (kg / g)</option>
+                        <option value="length">Length (cm / m)</option>
+                    </select>
+                </div>
+                
+                <div class="conv-row">
+                    <label>From</label>
+                    <select id="conv-from" class="conv-select" onchange="runConversion()"></select>
+                    <input type="number" id="conv-input-val" class="conv-input" value="1" oninput="runConversion()">
+                </div>
+
+                <div class="conv-row">
+                    <label>To</label>
+                    <select id="conv-to" class="conv-select" onchange="runConversion()"></select>
+                    <input type="text" id="conv-output-val" class="conv-input" readonly>
+                </div>
+                <button class="key op" style="width:100%; border-radius:12px; margin-top:12px; aspect-ratio:auto;" onclick="logConversion()">Log Conversion</button>
+            </div>
+        </div>
+
+        <div class="side-panel">
+            <div class="panel-title">Recent History</div>
+            <div class="history-log" id="history-log"></div>
+            <button class="clear-hist-btn" onclick="clearHistoryLog()">Clear History</button>
+        </div>
+    </div>
+</div>
+
+<script src="interact.js"></script>
+</body>
+</html>

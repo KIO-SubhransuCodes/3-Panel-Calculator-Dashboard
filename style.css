@@ -1,0 +1,318 @@
+:root {
+    --bg-color: #0b0b0c;
+    --panel-bg: #1e1e24;
+    --display-bg: #2a2a32;
+    --text-color: #ffffff;
+    --text-muted: #8e8e93;
+    --btn-number: #33333c;
+    --btn-operator: #ff9f0a;
+    --btn-fn: #a5a5a5;
+    --btn-fn-text: #000000;
+    --accent: #0a84ff;
+    --gap: 24px;
+    --border-color: #3a3a44;
+}
+
+[data-theme="light"] {
+    --bg-color: #f2f2f7;
+    --panel-bg: #ffffff;
+    --display-bg: #e5e5ea;
+    --text-color: #000000;
+    --text-muted: #68686e;
+    --btn-number: #d1d1d6;
+    --btn-operator: #ff9500;
+    --btn-fn: #aeaeae;
+    --btn-fn-text: #ffffff;
+    --accent: #007aff;
+    --border-color: #c7c7cc;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.wrapper {
+    max-width: 930px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap);
+}
+
+.header-bar {
+    background-color: var(--panel-bg);
+    border-radius: 24px;
+    padding: 20px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+.header-title {
+    font-size: 32px;
+    font-weight: 900;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
+.theme-toggle-btn {
+    background-color: var(--display-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.theme-toggle-btn:hover {
+    border-color: var(--accent);
+}
+
+.dashboard {
+    display: grid;
+    grid-template-columns: 200px 400px 280px;
+    gap: var(--gap);
+    align-items: stretch;
+}
+
+.side-panel {
+    background-color: var(--panel-bg);
+    border-radius: 24px;
+    padding: 24px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    display: flex;
+    flex-direction: column;
+}
+
+.panel-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 20px;
+}
+
+.mode-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.mode-btn {
+    background: var(--display-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    padding: 14px 16px;
+    font-size: 15px;
+    font-weight: 600;
+    text-align: left;
+    cursor: pointer;
+    border-radius: 12px;
+}
+
+.mode-btn:hover {
+    border-color: var(--accent);
+}
+
+.mode-btn.active {
+    background-color: var(--accent);
+    color: white;
+    border-color: var(--accent);
+}
+
+.calc-container {
+    background-color: var(--panel-bg);
+    border-radius: 24px;
+    padding: 24px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.display-screen {
+    background-color: var(--display-bg);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 20px;
+    min-height: 110px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+    word-break: break-all;
+}
+
+.history-line {
+    font-size: 16px;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    min-height: 20px;
+}
+
+.current-input {
+    font-size: 36px;
+    font-weight: 300;
+}
+
+.keypad {
+    display: none;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+.keypad.active {
+    display: grid;
+}
+
+#scientific-keypad {
+    grid-template-columns: repeat(5, 1fr);
+}
+
+button.key {
+    border: none;
+    outline: none;
+    padding: 16px 0;
+    font-size: 20px;
+    font-weight: 500;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    aspect-ratio: 1;
+}
+
+#scientific-keypad button.key {
+    font-size: 15px;
+    border-radius: 12px;
+    aspect-ratio: auto;
+    padding: 14px 0;
+}
+
+button.key:active {
+    filter: brightness(1.2);
+    transform: scale(0.96);
+}
+
+.num { background-color: var(--btn-number); color: var(--text-color); }
+.op { background-color: var(--btn-operator); color: white; }
+.fn { background-color: var(--btn-fn); color: var(--btn-fn-text); }
+.double-width { grid-column: span 2; border-radius: 40px !important; aspect-ratio: auto !important; }
+
+#converter-container {
+    display: none;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.conv-row {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.conv-row label {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.conv-select, .conv-input {
+    background-color: var(--display-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+}
+
+.history-log {
+    flex-grow: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-right: 4px;
+    max-height: 400px;
+}
+
+.history-log::-webkit-scrollbar {
+    width: 4px;
+}
+.history-log::-webkit-scrollbar-thumb {
+    background: var(--display-bg);
+    border-radius: 4px;
+}
+
+.history-item {
+    background: var(--display-bg);
+    padding: 10px 14px;
+    border-radius: 10px;
+    border-left: 3px solid var(--accent);
+    animation: fadeIn 0.2s ease-out;
+}
+
+.hist-expr {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+    word-break: break-all;
+}
+
+.hist-res {
+    font-size: 16px;
+    font-weight: 600;
+    text-align: right;
+    word-break: break-all;
+}
+
+.clear-hist-btn {
+    background: none;
+    border: none;
+    color: #ff453a;
+    font-size: 12px;
+    cursor: pointer;
+    margin-top: auto;
+    padding-top: 15px;
+    text-align: center;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 900px) {
+    .dashboard {
+        grid-template-columns: 1fr;
+    }
+    .header-bar {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+    }
+}
